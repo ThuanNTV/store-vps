@@ -1,0 +1,4 @@
+node_modules/
+src/resources/scss
+src/public/css
+.vscode
