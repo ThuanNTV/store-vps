@@ -5,7 +5,7 @@ const siteRouter = require("./main");
 // const coursesRouter = require("./courses");
 
 function routes(app) {
-  app.use("/user", VPSRouter);
+  app.use("/vps", VPSRouter);
 
   // start
   app.use("/", siteRouter);

@@ -9,9 +9,11 @@ const VPSs = new Schema(
     name: { type: String, require: true },
     desc: { type: String },
     image: { type: String },
+    Donvi: { type: String },
     CPU: { type: String, require: true },
     memory: { type: String, require: true },
-    diskSSD: { type: String, require: true },
+    ssd: { type: String, require: true },
+    price: { type: String, require: true },
     local: { type: String, require: true },
     slug: { type: String, slug: "name", unique: true },
     deleted: { type: Boolean, default: false },
@@ -23,7 +25,7 @@ const VPSs = new Schema(
 
 // Add plugins
 mongoose.plugin(slug);
-Course.plugin(mongooseDelete, {
+VPSs.plugin(mongooseDelete, {
   overrideMethods: "all",
   deletedAt: true,
 });

@@ -12,13 +12,13 @@ require("dotenv").config();
 const port = process.env.PORT;
 
 const route = require("./routes");
-// const db = require("./config/db");
+const db = require("./config/db");
 // const SortMiddleware = require("./app/middleware/SortMiddleware");
 
 // format date
 
 // connect db
-// db.connect();
+db.connect();
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(methodOverride("_method"));
