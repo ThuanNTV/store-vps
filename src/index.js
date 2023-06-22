@@ -15,7 +15,6 @@ const route = require("./routes");
 const db = require("./config/db");
 // const SortMiddleware = require("./app/middleware/SortMiddleware");
 
-// format date
 
 // connect db
 db.connect();

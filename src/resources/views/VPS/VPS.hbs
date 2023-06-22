@@ -1,0 +1,135 @@
+<div class="box">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/vps/show-List">VPS</a></li>
+            <li class="is-active"><a href="#" aria-current="page">VPS list</a></li>
+        </ul>
+    </nav>
+    <h3>{{vps.local}}:{{vps.name}} Cấu hình: {{vps.CPU}}-{{vps.memory}}-{{vps.ssd}} Giá: {{vps.price}} {{vps.Donvi}}
+    </h3>
+
+    <form class="field is-horizontal" action="/vps/add-new-vps/{{vps._id}}?_method=PUT" method="POST">
+        <div class="field-body">
+
+            <div class="field">
+                <p class="control is-expanded has-icons-left has-icons-right">
+                    <input class="input is-success" type="text" placeholder="Nhập IP" value="1.1.1.1" id="ip" name="ip">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-check"></i>
+                    </span>
+                </p>
+            </div>
+            <div class="field">
+                <p class="control is-expanded has-icons-left has-icons-right">
+                    <input class="input is-success" type="text" placeholder="Nhập PORT" value="10000" id="port"
+                        name="port">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-check"></i>
+                    </span>
+                </p>
+            </div>
+            <div class="field">
+                <p class="control is-expanded has-icons-left has-icons-right">
+                    <input class="input is-success" type="text" placeholder="Nhập username" value="Administrator"
+                        id="user" name="user">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-check"></i>
+                    </span>
+                </p>
+            </div>
+            <div class="field">
+                <p class="control is-expanded has-icons-left has-icons-right">
+                    <input class="input is-success" type="password" placeholder="Nhập password" value="123456"
+                        id="password" name="password">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-check"></i>
+                    </span>
+                </p>
+            </div>
+            <div class="field">
+                <p class="control is-expanded has-icons-left">
+                    <button class="button is-success" type="submit">lưu</button>
+                </p>
+            </div>
+        </div>
+    </form>
+
+    <table class="table is-fullwidth">
+        <thead>
+            <tr>
+                <th><abbr title="Position">STT</abbr></th>
+                <th>IP:PORT</th>
+                <th><abbr title="Username">Username</abbr></th>
+                <th><abbr title="Password">Password</abbr></th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each vps.vps}}
+            <tr>
+                <th>{{sum @index 1}}</th>
+                <td><a href="{{this.ip}}:{{this.port}}">{{this.ip}}:{{this.port}}</a></td>
+                <td>{{this.user}}</td>
+                <td>{{this.password}}</td>
+                <td>
+                    <div class="buttons">
+                        <button class="button is-success">Sửa</button>
+                        <button class="button is-danger">
+                            <a href="/vps/{{this._id}}/delete" data-toggle="modal" data-target="#delete-vps-modal"
+                                data-id="{{this._id}}">Xóa</a>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            {{else}}
+            <tr>
+                <td class="has-text-centered">No vps found.
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{! confirm delete vps }}
+
+    <div id="delete-vps-modal" class="modal" tabindex="-1">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Xóa</p>
+                <button class="delete" aria-label="close"></button>
+            </header>
+
+            <section class="modal-card-body">
+                <div class="content">
+                    <h3>Bạn có chắc chắn xóa dữ liệu này?</h3>
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button is-danger" id="delete-vps-btn">Xóa</button>
+                <button class="button">Hủy bỏ</button>
+            </footer>
+        </div>
+    </div>
+
+    {{! delete form hidden }}
+    <form method="POST" name="delete-vps-form"></form>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+
+
+    })
+</script>

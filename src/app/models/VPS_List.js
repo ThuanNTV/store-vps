@@ -15,6 +15,15 @@ const VPSs = new Schema(
     ssd: { type: String, require: true },
     price: { type: String, require: true },
     local: { type: String, require: true },
+    vps: [
+      {
+        id: { type: mongoose.ObjectId },
+        ip: { type: String, unique: true },
+        port: { type: String },
+        user: { type: String },
+        password: { type: String },
+      },
+    ],
     slug: { type: String, slug: "name", unique: true },
     deleted: { type: Boolean, default: false },
   },

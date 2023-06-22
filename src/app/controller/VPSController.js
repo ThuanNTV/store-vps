@@ -6,37 +6,67 @@ const {
 
 class VPSController {
   show(req, res, next) {
-    Vps.findOne({ slug: req.params.slug })
-      .then(
-        (VPS) =>
-          res.render("VPS/show", {
-            course: mongooseToObject(VPS),
-          }),
-        console.log(VPS)
+    VPSs.findOne({ slug: req.params.slug })
+      .then((VPS) =>
+        res.render("VPS/show", {
+          course: mongooseToObject(VPS),
+        })
       )
       .catch(next);
   }
 
-  // [GET]
+  // [GET] /vps/create
   create(req, res, next) {
     res.render("VPS/createVPS");
+  }
+  // [GET] /vps/show-List
+  showList(req, res, next) {
+    let vpsQuery = VPSs.find({});
+
+    Promise.all([vpsQuery, VPSs.countDocumentsDeleted()]).then(
+      ([vps, deletedCount]) =>
+        res.render("VPS/VPSs", {
+          deletedCount,
+          vps: multiplesMongooseToObject(vps),
+        })
+    );
   }
 
   // [POST]
   lib(req, res, next) {
-    // console.log(res.json(req.body));
     const vps = new VPSs(req.body);
     vps
       .save()
-      //   .then(() => res.redirect("/me/stored/courses"))
-      .then(() => console.log(res.json(req.body)))
+      .then(() => res.redirect("/vps/show-List"))
       .catch((error) => {});
+  }
+
+  addNewVPS(req, res, next) {
+    const formData = {
+      "vps.$.ip": req.body.ip,
+      "vps.$.user": req.body.user,
+      "vps.$.password": req.body.password,
+    };
+    console.log(formData);
+    VPSs.findByIdAndUpdate({ _id: req.params.id }, { $push: { vps: req.body } })
+      .then(() => res.redirect("back"))
+      .catch(next);
+  }
+
+  showListVPS_Id(req, res, next) {
+    VPSs.findById(req.params.id)
+      .then((vps) =>
+        res.render("VPS/vps", {
+          vps: mongooseToObject(vps),
+        })
+      )
+      .catch(next);
   }
 
   edit(req, res, next) {
     Course.findById(req.params.id)
       .then((course) =>
-        res.render("courses/edit", {
+        res.render("VPS/edit", {
           course: mongooseToObject(course),
         })
       )
@@ -51,7 +81,7 @@ class VPSController {
   }
 
   delete(req, res, next) {
-    Course.delete({ _id: req.params.id })
+    VPSs.delete({ _id: req.params.id })
       .then(() => res.redirect("back"))
       .catch(next);
   }
