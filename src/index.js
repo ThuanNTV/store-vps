@@ -15,7 +15,6 @@ const route = require("./routes");
 const db = require("./config/db");
 // const SortMiddleware = require("./app/middleware/SortMiddleware");
 
-
 // connect db
 db.connect();
 
@@ -38,6 +37,12 @@ app.engine(
     extname: ".hbs",
     helpers: {
       sum: (a, b) => a + b,
+      get_length: (obj) => obj.length,
+      currency_formatting: (x) =>
+        new Intl.NumberFormat("vi-VN", {
+          style: "currency",
+          currency: "VND",
+        }).format(x),
     },
   })
 );

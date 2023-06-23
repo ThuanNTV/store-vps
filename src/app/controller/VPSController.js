@@ -32,7 +32,7 @@ class VPSController {
     );
   }
 
-  // [POST]
+  // [POST] /vps/lib
   lib(req, res, next) {
     const vps = new VPSs(req.body);
     vps
@@ -41,28 +41,27 @@ class VPSController {
       .catch((error) => {});
   }
 
+  // [PUT] /vps/add-new-vps/:id?_method=PUT
   addNewVPS(req, res, next) {
-    const formData = {
-      "vps.$.ip": req.body.ip,
-      "vps.$.user": req.body.user,
-      "vps.$.password": req.body.password,
-    };
-    console.log(formData);
     VPSs.findByIdAndUpdate({ _id: req.params.id }, { $push: { vps: req.body } })
       .then(() => res.redirect("back"))
       .catch(next);
   }
 
+  // [GET] /vps/show-List/:id
   showListVPS_Id(req, res, next) {
     VPSs.findById(req.params.id)
       .then((vps) =>
         res.render("VPS/vps", {
           vps: mongooseToObject(vps),
+          vpsId: mongooseToObject(vps)._id.toString(),
         })
       )
       .catch(next);
   }
 
+  // TODO: continue
+  // [GET] /vps/:id/edit
   edit(req, res, next) {
     Course.findById(req.params.id)
       .then((course) =>
@@ -82,6 +81,15 @@ class VPSController {
 
   delete(req, res, next) {
     VPSs.delete({ _id: req.params.id })
+      .then(() => res.redirect("back"))
+      .catch(next);
+  }
+
+  deleteVPS(req, res, next) {
+    VPSs.findOneAndUpdate(
+      { _id: req.params.id },
+      { $pull: { vps: req.body.id } }
+    )
       .then(() => res.redirect("back"))
       .catch(next);
   }

@@ -10,12 +10,13 @@
                 <th><abbr title="memory">memory</abbr></th>
                 <th><abbr title="Dick SSD">Dick SSD</abbr></th>
                 <th><abbr title="price">Giá (VNĐ)</abbr></th>
+                <th><abbr title="price">Số lượng (VPS)</abbr></th>
                 <th>Hành động</th>
             </tr>
         </thead>
         <tbody>
             {{#each vps}}
-            <tr>
+            <tr class="has-text-centered">
                 <th>{{sum @index 1}}</th>
                 <td>{{this.name}}
                 </td>
@@ -24,7 +25,8 @@
                 <td>{{this.CPU}}</td>
                 <td>{{this.memory}}</td>
                 <td>{{this.ssd}}</td>
-                <td>{{this.price}}</td>
+                <td>{{currency_formatting this.price}}</td>
+                <td>{{get_length this.vps}}</td>
                 <td>
                     <div class="buttons">
                         <button class="button is-info">
@@ -78,12 +80,6 @@
 
         // Functions to open and close a modal
         $('#delete-vps-modal').on('show.bs.modal', function (event) {
-            var button =
-                $(event.relatedTarget);
-            vpsId = button.data('id');
-        })
-
-        $('#show-list-vps').on('show.bs.modal', function (event) {
             var button =
                 $(event.relatedTarget);
             vpsId = button.data('id');

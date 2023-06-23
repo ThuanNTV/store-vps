@@ -6,7 +6,9 @@
             <li class="is-active"><a href="#" aria-current="page">VPS list</a></li>
         </ul>
     </nav>
-    <h3>{{vps.local}}:{{vps.name}} Cấu hình: {{vps.CPU}}-{{vps.memory}}-{{vps.ssd}} Giá: {{vps.price}} {{vps.Donvi}}
+    <h3 class="mb-4">{{vps.local}}:{{vps.name}} Cấu hình: {{vps.CPU}} CPU-{{vps.memory}}GB Ram-{{vps.ssd}}GB SSD -- Giá:
+        {{currency_formatting
+        vps.price}}
     </h3>
 
     <form class="field is-horizontal" action="/vps/add-new-vps/{{vps._id}}?_method=PUT" method="POST">
@@ -79,17 +81,18 @@
         </thead>
         <tbody>
             {{#each vps.vps}}
-            <tr>
+            <tr class="has-text-centered">
                 <th>{{sum @index 1}}</th>
                 <td><a href="{{this.ip}}:{{this.port}}">{{this.ip}}:{{this.port}}</a></td>
                 <td>{{this.user}}</td>
                 <td>{{this.password}}</td>
+                <td>{{this._id}}</td>
                 <td>
                     <div class="buttons">
                         <button class="button is-success">Sửa</button>
                         <button class="button is-danger">
-                            <a href="/vps/{{this._id}}/delete" data-toggle="modal" data-target="#delete-vps-modal"
-                                data-id="{{this._id}}">Xóa</a>
+                            <a href="/vps/{{vpsId}}/{{this._id}}/delete" data-toggle="modal"
+                                data-target="#delete-vps-modal" data-id="{{this._id}}">Xóa</a>
                         </button>
                     </div>
                 </td>
@@ -128,8 +131,20 @@
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        var vpsId;
+        var deleteForm = document.forms['delete-vps-form'];
+        const deleteVPS_btn = document.getElementById('delete-vps-btn');
 
+        // Functions to open and close a modal
+        $('#delete-vps-modal').on('show.bs.modal', function (event) {
+            var button =
+                $(event.relatedTarget);
+            vpsId = button.data('id');
+        })
 
-
+        deleteVPS_btn.addEventListener('click', function () {
+            deleteForm.action = '/vps/' + vpsId + '/' + vpsId + '?_method=DELETE';
+            deleteForm.submit();
+        })
     })
 </script>
