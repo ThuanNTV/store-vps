@@ -52,7 +52,7 @@ class VPSController {
   showListVPS_Id(req, res, next) {
     VPSs.findById(req.params.id)
       .then((vps) =>
-        res.render("VPS/vps", {
+        res.render("VPS/VPS", {
           vps: mongooseToObject(vps),
           vpsId: mongooseToObject(vps)._id.toString(),
         })
