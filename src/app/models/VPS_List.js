@@ -22,6 +22,8 @@ const VPSs = new Schema(
         port: { type: String },
         user: { type: String },
         password: { type: String },
+        hdh: { type: String },
+        status: { type: String },
       },
     ],
     slug: { type: String, slug: "name", unique: true },

@@ -62,6 +62,27 @@
                 </p>
             </div>
             <div class="field">
+                <div class="control is-expanded has-icons-left has-icons-right">
+                    <div class="select is-success">
+                        <select id="hdh" name="hdh">
+                            <option value="window">Window</option>
+                            <option value="ubuntu">Ubuntu</option>
+                            <option value="os">os</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <div class="control is-expanded has-icons-left has-icons-right">
+                    <div class="select is-success">
+                        <select id="status" name="status">
+                            <option value="on">on</option>
+                            <option value="off">off</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
                 <p class="control is-expanded has-icons-left">
                     <button class="button is-success" type="submit">lưu</button>
                 </p>
@@ -76,17 +97,20 @@
                 <th>IP:PORT</th>
                 <th><abbr title="Username">Username</abbr></th>
                 <th><abbr title="Password">Password</abbr></th>
+                <th>Hệ điều hành</th>
+                <th>Trạng thái</th>
                 <th>Hành động</th>
             </tr>
         </thead>
         <tbody>
             {{#each vps.vps}}
-            <tr class="has-text-centered">
+            <tr>
                 <th>{{sum @index 1}}</th>
                 <td><a href="{{this.ip}}:{{this.port}}">{{this.ip}}:{{this.port}}</a></td>
                 <td>{{this.user}}</td>
                 <td>{{this.password}}</td>
-                <td>{{this._id}}</td>
+                <td>{{this.hdh}}</td>
+                <td>{{this.status}}</td>
                 <td>
                     <div class="buttons">
                         <button class="button is-success">Sửa</button>

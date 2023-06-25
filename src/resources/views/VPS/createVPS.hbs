@@ -18,7 +18,7 @@
                     <label class="label">Giá tiền: </label>
                 </div>
                 <p class="control">
-                    <input class="input" type="text" placeholder="Nhập giá tiền" id="price" name="price" />
+                    <input class="input" type="text" placeholder="Nhập giá tiền" id="price" name="price" required />
                 </p>
                 <p class="control">
                     <span class="select">
@@ -41,7 +41,7 @@
                 <div class="field is-narrow">
                     <div class="control">
                         <div class="select is-fullwidth">
-                            <select id="CPU" name="CPU">
+                            <select id="CPU" name="CPU" required>
                                 <option value="CPU">CPU</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -60,7 +60,7 @@
                 <div class="field is-narrow">
                     <div class="control">
                         <div class="select is-fullwidth">
-                            <select id="memory" name="memory">
+                            <select id="memory" name="memory" required>
                                 <option value="MEMORY">MEMORY</option>
                                 <option value="1">1 GB</option>
                                 <option value="2">2 GB</option>
@@ -79,7 +79,7 @@
                 <div class="field is-narrow">
                     <div class="control">
                         <div class="select is-fullwidth">
-                            <select id="ssd" name="ssd">
+                            <select id="ssd" name="ssd" required>
                                 <option value="Disk SSD">Disk SSD</option>
                                 <option value="20">20 GB</option>
                                 <option value="40">40 GB</option>
@@ -121,7 +121,8 @@
         <div class="field-body">
             <div class="field">
                 <div class="control">
-                    <input class="input" type="text" placeholder="Nhập khu vực của VPS" id="local" name="local" />
+                    <input class="input" type="text" placeholder="Nhập khu vực của VPS" id="local" name="local"
+                        required />
                 </div>
             </div>
         </div>
@@ -141,15 +142,12 @@
                 <div class="file is-normal has-name">
                     <label class="file-label">
                         <figure class="image is-128x128 ml-6 mr-4">
-                            <img src="https://bulma.io/images/placeholders/128x128.png" />
+                            <img id="image" src="https://bulma.io/images/placeholders/128x128.png" />
                         </figure>
                         <input class="file-input" type="file" name="image" />
                         <span class="file-cta">
                             <span class="file-icon">
-                                <i class="fas fa-upload"></i>
-                            </span>
-                            <span class="file-label">
-                                Normal file…
+                                <img src="/img/cloud-computing.png">
                             </span>
                         </span>
                         <span class="file-name">
@@ -180,3 +178,16 @@
         </div>
     </div>
 </form>
+
+<script>
+    var file = document.getElementsByClassName("file-input");
+    var image = document.getElementById("image");
+    for (var i = 0; i < file.length; i++) {
+        file[i].onchange = function (e) {
+            if (this.files.length > 0) {
+                document.getElementsByClassName("file-name")[0].innerHTML = this.files[0].name;
+                image.src = URL.createObjectURL(this.files[0])
+            }
+        };
+    }
+</script>
