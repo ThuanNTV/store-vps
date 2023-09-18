@@ -1,23 +1,15 @@
 {
   "name": "store_vps",
   "version": "1.0.0",
-  "description": "store to buy & sell vps",
+  "description": "shop vps",
   "main": "index.js",
   "scripts": {
-    "beautiful": "lint-staged",
-    "start": "nodemon --inspect src/index.js",
-    "watch": "sass --watch src/resources/scss/app.scss src/public/css/app.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ThuanNTV/store-vps.git"
+    "url": "git+ssh://git@github.com/ThuanNTV/store-vps.git"
   },
-  "keywords": [
-    "vps",
-    "store",
-    "shop"
-  ],
   "author": "Thuan Nguyen",
   "license": "ISC",
   "bugs": {
@@ -25,21 +17,6 @@
   },
   "homepage": "https://github.com/ThuanNTV/store-vps#readme",
   "dependencies": {
-    "express": "^4.18.2",
-    "express-handlebars": "^7.0.7",
-    "method-override": "^3.0.0",
-    "mongoose": "^7.2.2",
-    "mongoose-delete": "^1.0.0",
-    "mongoose-slug-updater": "^3.3.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.1"
-  },
-  "devDependencies": {
-    "husky": "^8.0.3",
-    "lint-staged": "^13.2.2",
-    "morgan": "^1.10.0",
-    "nodemon": "^2.0.22",
-    "prettier": "^2.8.8",
-    "sass": "^1.62.1"
+    "express": "^4.18.2"
   }
 }
